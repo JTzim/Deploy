@@ -12,4 +12,4 @@ jobs:
       - name: Build Docker image
         run: docker build -t app-deploy-demo .
       - name: run Docker container
-        run: docker run -d -p 8080:80 app-deploy-demo
+        run: docker run -d -p 80:80 app-deploy-demo
