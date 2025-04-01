@@ -1,77 +1,38 @@
-# Deploy de uma Aplicação Web Simples usando Docker e GitHub Actions
+# app-deploy-demo
 
-Este projeto demonstra como configurar um ambiente virtual, containerizar uma aplicação e realizar o deploy automatizado utilizando Docker e GitHub Actions.
+## O que acontece se o deploy falhar? Como podemos melhorar o processo?
+Se o deploy falhar, a aplicação pode não ser atualizada corretamente, resultando em uma versão antiga em produção ou até mesmo uma interrupção do serviço. Para melhorar o processo, podemos:
 
-## Objetivo
-Aprender a configurar um ambiente virtual, containerizar uma aplicação e automatizar o deploy utilizando GitHub Actions.
+- **Implementar rollback automático** para restaurar a última versão estável caso o deploy falhe.
+- **Adicionar logs detalhados** no pipeline de CI/CD para facilitar a identificação de erros.
+- **Executar testes automatizados** antes do deploy para detectar problemas antecipadamente.
+- **Utilizar verificações de saúde (health checks)** para garantir que a aplicação está funcionando corretamente após o deploy.
 
-## Pré-requisitos
-- Conta no GitHub (gratuita e fácil de criar)
-- Docker instalado localmente ou uso do [Play with Docker](https://labs.play-with-docker.com/) para um ambiente online gratuito
-- Conhecimentos básicos de Git, linha de comando e conceitos de CI/CD
+## Quais são as vantagens de usar CI/CD e Docker?
+- **CI/CD (Integração Contínua/Entrega Contínua)**:
+  - Reduz o risco de erros em produção.
+  - Acelera o processo de desenvolvimento e entrega de software.
+  - Permite testes automatizados antes da implantação.
+  - Facilita a colaboração entre equipes de desenvolvimento e operações.
 
-## Passos para Configuração
+- **Docker**:
+  - Garante que a aplicação rode de forma consistente em qualquer ambiente.
+  - Facilita a escalabilidade e a distribuição da aplicação.
+  - Melhora a segurança ao isolar aplicações em containers.
+  - Simplifica o processo de deploy e rollback.
 
-### 1. Criar o Repositório no GitHub
-1. Criar um novo repositório chamado **app-deploy-demo**.
-2. Clonar o repositório localmente:
-   ```sh
-   git clone https://github.com/seu-usuario/app-deploy-demo.git
-   cd app-deploy-demo
-   ```
-3. Criar um arquivo `README.md` e adicionar informações do projeto.
-4. Criar um arquivo `Dockerfile` para a aplicação.
-5. Comitar e enviar as alterações:
-   ```sh
-   git add .
-   git commit -m "Configuração inicial do projeto"
-   git push origin main
-   ```
+## Como podemos monitorar a aplicação em produção?
+Para monitorar uma aplicação em produção, podemos utilizar diferentes abordagens:
 
-### 2. Configurar GitHub Actions
-1. Criar a pasta `.github/workflows/` no repositório.
-2. Criar o arquivo `deploy.yml` dentro da pasta e adicionar o seguinte código:
-   ```yaml
-   name: Deploy Application
+1. **Monitoramento de Logs**  
+   - Ferramentas como **ELK Stack (Elasticsearch, Logstash, Kibana)** ou **Grafana Loki** podem ser usadas para coletar e analisar logs em tempo real.
 
-   on:
-     push:
-       branches:
-         - main
+2. **Monitoramento de Métricas**  
+   - Serviços como **Prometheus + Grafana** permitem visualizar métricas de desempenho da aplicação, como uso de CPU, memória e tempo de resposta.
 
-   jobs:
-     deploy:
-       runs-on: ubuntu-latest
-       steps:
-         - name: Checkout do código
-           uses: actions/checkout@v2
+3. **Health Checks e Alertas**  
+   - Implementar endpoints de **/health** na aplicação para verificar o status dos serviços.
+   - Usar ferramentas como **Datadog, New Relic ou AWS CloudWatch** para configurar alertas automáticos em caso de falhas.
 
-         - name: Configurar Docker
-           run: |
-             docker build -t app-deploy-demo .
-             docker run -d -p 8080:8080 app-deploy-demo
-   ```
-3. Comitar e enviar o arquivo `deploy.yml` para o repositório.
-
-### 3. Executar o Deploy
-1. Fazer um `push` para o repositório para acionar o GitHub Actions.
-2. Acompanhar a execução do workflow no GitHub Actions.
-
-### 4. Testar a Aplicação
-1. Verificar os contêineres em execução:
-   ```sh
-   docker ps
-   ```
-2. Testar o acesso à aplicação via navegador ou terminal:
-   ```sh
-   curl http://localhost:8080
-   ```
-
-## Conclusão
-Este projeto demonstra como automatizar o deploy de uma aplicação simples utilizando Docker e GitHub Actions. Ele pode ser expandido para projetos mais complexos conforme necessário.
-
-## Recursos de Apoio
-- [Documentação do GitHub Actions](https://docs.github.com/en/actions)
-- [Docker Hub](https://hub.docker.com/)
-- [Play with Docker](https://labs.play-with-docker.com/)
-
+4. **Tracing e Debugging**  
+   - Ferramentas como **Jaeger e OpenTelemetry** ajudam a rastrear requisições e identificar gargalos de desempenho.
