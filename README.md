@@ -6,8 +6,8 @@ Este projeto demonstra como configurar um ambiente virtual, containerizar uma ap
 Aprender a configurar um ambiente virtual, containerizar uma aplicação e automatizar o deploy utilizando GitHub Actions.
 
 ## Pré-requisitos
-- Conta no GitHub
-- Docker instalado localmente ou uso do [Play with Docker](https://labs.play-with-docker.com/)
+- Conta no GitHub (gratuita e fácil de criar)
+- Docker instalado localmente ou uso do [Play with Docker](https://labs.play-with-docker.com/) para um ambiente online gratuito
 - Conhecimentos básicos de Git, linha de comando e conceitos de CI/CD
 
 ## Passos para Configuração
